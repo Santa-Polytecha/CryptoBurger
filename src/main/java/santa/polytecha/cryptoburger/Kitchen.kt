@@ -3,7 +3,7 @@ package santa.polytecha.cryptoburger
 class Kitchen(initialCapacity: Int) : ArrayList<Cook>(initialCapacity) {
 	
 	constructor(): this(1)
-	constructor(c: Collection<out Cook>): this(c.size) {
+	constructor(c: Collection<Cook>): this(c.size) {
 		for (x in c)
 			add(x)
 	}

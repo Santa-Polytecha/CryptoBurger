@@ -55,7 +55,7 @@ The class `Cook` contains a function that can be defined during instantiation. T
 
 ```kotlin
 val burger = Burger(BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(4))
-val cook = Cook() { x: Burger -> x++ }
+val cook = Cook { x: Burger -> x.clone().inc() }
 
 cook(burger) // Return Burger [3, 4, 5]
 // One can also call cook.apply(burger).
@@ -70,8 +70,8 @@ val c1 = Cook { x: Burger -> x.clone().inc() } // Add 1 to all element of the ve
 val c2 = Cook { x: Burger -> x * 2 } // Multiply all elements by 2
 val c3 = Cook { x: Burger -> x.rem(9) } // Modulo 9
 val kitchen = Kitchen(c1, c2, c3)
-// b = [2, 3, 4]
 
+// b = [2, 3, 4]
 val b = Burger(BigInteger.valueOf(2), BigInteger.valueOf(3), BigInteger.valueOf(4))
 kitchen(b) // Return Burger [6, 8, 1]
 ```
