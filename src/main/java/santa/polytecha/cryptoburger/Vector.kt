@@ -33,6 +33,10 @@ class Vector(
 	constructor(numberOfDimensions: Int, defaultValue: BigInteger): this(numberOfDimensions) {
 		array.fill(defaultValue)
 	}
+	constructor(vararg x: BigInteger): this(x.size) {
+		for (i in 0 until _numberOfDimensions)
+			setElement(i, x[i])
+	}
 	
 	private fun checkIndex(index: Int): Boolean {
 		return index in 0 until _numberOfDimensions
@@ -86,20 +90,8 @@ class Vector(
 		return mapIndexed { i: Int, x: BigInteger -> x.multiply(v[i]) }.sum()
 	}
 	
-	fun BigInteger.sqrt(n: BigInteger): BigInteger {
-		var a = BigInteger.ONE
-		var b = n.shiftRight(5).add(BigInteger.valueOf(8))
-		while (b >= a) {
-			val mid = a.add(b).shiftRight(1)
-			if (mid.multiply(mid) > n)
-				b = mid.subtract(BigInteger.ONE) else
-				a = mid.add(BigInteger.ONE)
-		}
-		return a.subtract(BigInteger.ONE)
-	}
-	
-	fun euclideanNorm(): BigInteger {
-		return map { x: BigInteger -> x.pow(2) }.sum().sqrt(BigInteger.valueOf(2))
+	fun euclideanNorm(): Double {
+		return kotlin.math.sqrt(map { x: BigInteger -> x.pow(2) }.sum().toDouble())
 	}
 	
 	fun crossProduct(v: Vector): Vector {
@@ -300,4 +292,16 @@ class Vector(
 	}
 	
 	//endregion
+}
+
+fun BigInteger.sqrt(n: BigInteger): BigInteger {
+	var a = BigInteger.ONE
+	var b = n.shiftRight(5).add(BigInteger.valueOf(8))
+	while (b >= a) {
+		val mid = a.add(b).shiftRight(1)
+		if (mid.multiply(mid) > n)
+			b = mid.subtract(BigInteger.ONE) else
+			a = mid.add(BigInteger.ONE)
+	}
+	return a.subtract(BigInteger.ONE)
 }
