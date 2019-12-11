@@ -13,7 +13,7 @@ class Kitchen(initialCapacity: Int) : ArrayList<Cook>(initialCapacity) {
 	}
 	
 	fun apply(x: Burger): Burger {
-		var result = Vector()
+		var result = x.clone()
 		for (cook in this)
 			result = cook(result)
 		return result

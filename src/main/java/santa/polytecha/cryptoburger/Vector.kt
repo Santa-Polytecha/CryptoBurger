@@ -4,6 +4,9 @@ import java.io.Serializable
 import java.math.BigInteger
 import kotlin.collections.ArrayList
 
+/**
+ * Class that respresents a vector.
+ */
 class Vector(
 	private var _numberOfDimensions: Int = 2
 ) : Serializable, Iterable<BigInteger> {
@@ -134,11 +137,13 @@ class Vector(
 	}
 	
 	operator fun inc(): Vector {
-		return clone().map { x: BigInteger -> x.add(BigInteger.ONE) }
+		mapAssign { x: BigInteger -> x.add(BigInteger.ONE) }
+		return this
 	}
 	
 	operator fun dec(): Vector {
-		return clone().map { x: BigInteger -> x.subtract(BigInteger.ONE) }
+		mapAssign { x: BigInteger -> x.subtract(BigInteger.ONE) }
+		return this
 	}
 	
 	operator fun plus(v: Vector): Vector {
